@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket Booking</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="bootstrap.css">
+</head>
+<body>
+    <div style="background:linear-gradient(120deg, #d4fc79 0%, #96e6a1 100%);">
+    <center>
+        <h1>Trains List</h1>
+    <table id="tbl" border="2" class="table table-dark table-hover" style="width: 600px; background-color:cornsilk;" >
+        <thead>
+            <th>Serial No.</th>
+            <th>Train Name</th>
+            <th>From</th>
+            <th>To</th>
+            <th>Operation</th>
+        </thead>
+        <tbody id="tbdy">
+
+        </tbody>
+    </table>
+    </center>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
+
+<!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-analytics.js"></script>
+
+<!-- Add Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-storage.js"></script>
+
+    <script>
+    const firebaseConfig = {
+    apiKey: "AIzaSyANfAzH3yRQwK2Jim_9fa8ej67IuVyvKck",
+    authDomain: "ticketbooking-30d1f.firebaseapp.com",
+    databaseURL: "https://ticketbooking-30d1f-default-rtdb.firebaseio.com",
+    projectId: "ticketbooking-30d1f",
+    storageBucket: "ticketbooking-30d1f.appspot.com",
+    messagingSenderId: "339229011524",
+    appId: "1:339229011524:web:2682ea9cefd91c11dfd611",
+    measurementId: "G-QZ1QFJTL0K"
+    };
+    firebase.initializeApp(firebaseConfig);
+
+    firebase.database().ref("Trains/").once("value",function(AllRecord){
+            AllRecord.forEach(function(snapshot){
+                    addtrain(snapshot.val().Tname, snapshot.val().From , snapshot.val().To)
+            });
+            })
+    var counter=1;
+    function addtrain(tname,from ,to)
+    {
+        row=document.createElement("tr")
+
+        cell1=document.createElement("td")
+        cell2=document.createElement("td")
+        cell3=document.createElement("td")
+        cell4=document.createElement("td")
+        cell5=document.createElement("td")
+        
+        cell1.textContent= counter++;
+        cell2.innerHTML=tname
+        cell3.innerHTML=from
+        cell4.innerHTML=to
+        
+        deletebtn=document.createElement("input")
+        deletebtn.setAttribute("type","button")
+        deletebtn.setAttribute("value","Delete")
+        deletebtn.setAttribute("onclick","del(this)")
+
+        cell5.append(deletebtn)
+
+        row.append(cell1)
+        row.append(cell2)
+        row.append(cell3)
+        row.append(cell4)
+        row.append(cell5)
+
+        document.getElementById("tbdy").append(row)
+    }   
+    function del(x1)
+             {
+                row=x1.parentNode.parentNode
+                Tname=row.childNodes[1].innerHTML
+                firebase.database().ref("Trains/"+Tname).remove()
+                row.style.display="none"
+             }      
+    </script>
+</body>
+</html>

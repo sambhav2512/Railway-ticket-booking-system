@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket Booking</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="bootstrap.css">
+</head>
+<body style="background-color: floralwhite;">
+  
+  <div id="div3">
+    <h1>Book Your Tickets Here...</h1>
+   </div>
+        <div id="div5">
+
+        </div>
+
+    <div id="wel2">           
+        <label for="">Seat Prefrence: </label>
+        <select id="sel2" class="form-control" style="width: 250px;">
+            <option>Lower Birth</option>
+            <option>Upper Birth</option>
+            <option>Middle Birth</option>
+            <option>Window Seat</option>
+        </select>
+    </div>
+    <div id="wel3">
+    <label for="">Enter Passenger Details:</label><br>
+       <input type="text" id="name" class="form-control" placeholder="Enter your Name..."><br>
+       
+      <input type="text" id="age" class="form-control" placeholder="Enter your Age..."><br>
+
+      <input type="text" id="no" class="form-control" placeholder="Enter your Mobile No..."><br>
+
+      <select id="gen" class="form-control">
+        <option>Select Gender...</option>
+        <option>Male</option>
+        <option>Female</option>
+      </select><br>
+      <button class="btn-default" style="border-radius: 10px;" onclick="addpassenger()">Add Passenger</button><br>
+    </div>
+
+    <div id="wel4">
+      <span class="close-icon" onclick="closepass()">&times;</span>
+      <input type="text" id="name2" class="form-control" placeholder="Enter your Name..."><br>
+      
+     <input type="text" id="age2" class="form-control" placeholder="Enter your Age..."><br>
+
+     <input type="text" id="no2" class="form-control" placeholder="Enter your Mobile No..."><br>
+
+     <select id="gen" class="form-control">
+       <option>Select Gender...</option>
+       <option>Male</option>
+       <option>Female</option>
+     </select><br>
+    </div>
+
+    <center>
+    <div id="wel5">
+      <h3>Check Your Details...</h3>
+      <span class="close-icon" onclick="closediv()">&times;</span>
+        <table border="3" class="table-info" id="tbl">
+          <tr>
+            <th>Name</th>
+            <td id="td1"></td>
+          </tr>
+          <tr>  
+            <th>Age</th>
+            <td id="td2"></td>
+          </tr>
+          <tr>  
+            <th>Mobile No.</th>
+            <td id="td3"></td>
+          </tr>
+          <tr>
+            <th>Gender</th>
+            <td id="td4"></td>
+          </tr>
+          <tr>  
+            <th>Train Name</th>
+            <td id="td5"></td>
+          </tr>
+          <tr>  
+            <th>Source Destination</th>
+            <td id="td6"></td>
+          </tr>
+          <tr>  
+            <th>Final Destination</th>
+            <td id="td7"></td>
+          </tr>
+          <tr>  
+            <th>Coach</th>
+            <td id="td8"></td>
+          </tr>
+          <tr>  
+            <th>Seat</th>
+            <td id="td9"></td>
+          </tr> 
+          <tr> 
+            <th>Date</th>
+            <td id="td10"></td>
+          </tr>
+          </table><br>
+          <button onclick="book2()" id="bookbtn2" class="btn-success">Book</button>
+    </div>
+    </center>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
+
+<!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-analytics.js"></script>
+
+<!-- Add Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-storage.js"></script>
+    
+    <script>
+        const firebaseConfig = {
+        apiKey: "AIzaSyANfAzH3yRQwK2Jim_9fa8ej67IuVyvKck",
+        authDomain: "ticketbooking-30d1f.firebaseapp.com",
+        databaseURL: "https://ticketbooking-30d1f-default-rtdb.firebaseio.com",
+        projectId: "ticketbooking-30d1f",
+        storageBucket: "ticketbooking-30d1f.appspot.com",
+        messagingSenderId: "339229011524",
+        appId: "1:339229011524:web:2682ea9cefd91c11dfd611",
+        measurementId: "G-QZ1QFJTL0K"
+        };
+        firebase.initializeApp(firebaseConfig);
+
+        var param = new URLSearchParams(window.location.search);
+        var data = param.get("id1");
+        var data2= param.get("id2");
+        var date=param.get("id3")
+
+        const dbRef = firebase.database().ref('Trains/');
+
+        dbRef.once('value').then((snapshot) => {
+
+        let matched = false;
+        
+        snapshot.forEach((childSnapshot) => {
+          const childData = childSnapshot.val();
+
+          if (childData.From === data && childData.To === data2) {
+            matched = true;
+            additem(childData.Tname , childData.From , childData.To , childData.Sleeper , childData['3AC'] , childData['2AC'] , childData['1AC'])
+          }
+        });
+
+        if (!matched) {
+          alert("No trains available on this route...");
+        }
+        }).catch((error) => {
+          console.error("Error reading data: ", error);
+        });
+     
+        function additem(tname , from , to , Sleeper , thac , secac , AC)
+         {
+            div=document.createElement("div")
+            div.innerHTML=tname
+            div.className="box"
+
+            div2=document.createElement("div")
+            div2.innerHTML=from
+            div2.className= 'box1';
+
+            div3=document.createElement("div")
+            div3.innerHTML=to
+            div3.className='box2';
+
+            div4=document.createElement("div")
+            div4.innerHTML="To";
+            div4.className='box3';
+
+            div6=document.createElement("div")
+            div6.className='box4'
+
+            div7=document.createElement("div")
+            div7.className='box5'
+            div7.innerHTML="AVL"+Sleeper
+
+            div8=document.createElement("div")
+            div8.className='box5'
+            div8.innerHTML="AVL"+thac
+
+            div9=document.createElement("div")
+            div9.className='box5'
+            div9.innerHTML="AVL"+secac
+
+            div10=document.createElement("div")
+            div10.className='box5'
+            div10.innerHTML="AVL"+AC
+
+           btn=document.createElement("input")
+           btn.setAttribute("type","button")
+           btn.setAttribute("value","Sleeper")
+           btn.setAttribute("onclick","book(this)")
+           btn.className='bookbtn';
+
+           btn2=document.createElement("input")
+           btn2.setAttribute("type","button")
+           btn2.setAttribute("value","3AC")
+           btn2.setAttribute("onclick","book(this)")
+           btn2.className='bookbtn';
+
+           btn3=document.createElement("input")
+           btn3.setAttribute("type","button")
+           btn3.setAttribute("value","2AC")
+           btn3.setAttribute("onclick","book(this)")
+           btn3.className='bookbtn';
+
+           btn4=document.createElement("input")
+           btn4.setAttribute("type","button")
+           btn4.setAttribute("value","1AC")
+           btn4.setAttribute("onclick","book(this)")
+           btn4.className='bookbtn';
+
+
+          div7.appendChild(btn)
+          div8.appendChild(btn2)
+          div9.appendChild(btn3)
+          div10.appendChild(btn4)
+
+           div6.appendChild(div7)
+           div6.appendChild(div8)
+           div6.appendChild(div9)
+           div6.appendChild(div10)
+
+            div.appendChild(div4)
+            div.appendChild(div3)
+            div.appendChild(div2)
+            div.appendChild(div6)
+          
+            document.getElementById("div5").append(div)
+         } 
+
+         function book (t1)
+         {
+            train=t1.parentNode.parentNode.parentNode.childNodes[0].textContent
+            to=t1.parentNode.parentNode.parentNode.childNodes[2].childNodes[0].textContent
+            from=t1.parentNode.parentNode.parentNode.childNodes[3].childNodes[0].textContent
+            coach=t1.parentNode.childNodes[1].value
+            seat=document.getElementById("sel2").value
+            name=document.getElementById("name").value
+            age=document.getElementById("age").value
+            no=document.getElementById("no").value
+            gen=document.getElementById("gen").value
+
+            if(!name || !age || !no || !gen)
+            {
+              alert("Please enter the all details to book your ticket...")
+              return;
+            }
+            
+            document.getElementById("td1").innerHTML="";
+            document.getElementById("td2").innerHTML="";
+            document.getElementById("td3").innerHTML="";
+            document.getElementById("td4").innerHTML="";
+            document.getElementById("td5").innerHTML="";
+            document.getElementById("td6").innerHTML="";
+            document.getElementById("td7").innerHTML="";
+            document.getElementById("td8").innerHTML="";
+            document.getElementById("td9").innerHTML="";
+            document.getElementById("td10").innerHTML="";
+
+            document.getElementById("td1").append(name)
+            document.getElementById("td2").append(age)
+            document.getElementById("td3").append(no)
+            document.getElementById("td4").append(gen)
+            document.getElementById("td5").append(train)
+            document.getElementById("td6").append(from)
+            document.getElementById("td7").append(to)
+            document.getElementById("td8").append(coach)
+            document.getElementById("td9").append(seat)
+            document.getElementById("td10").append(date)
+
+            document.getElementById("wel5").style.display="block";
+         }
+         function book2()
+         {
+          trainname=document.getElementById("td5").innerHTML
+          coc = document.getElementById("td8").innerHTML
+          if(trainname && coc)
+         {
+          const seatref=firebase.database().ref('/Trains/' + trainname + '/' + coc)
+          console.log(seatref)
+          seatref.once('value').then((snapshot) => {
+            const current = snapshot.val()
+            console.log(current)
+            if(current>0)
+          {
+            seatref.set(current-1);
+            alert("Ticket booked successfully!");
+            document.getElementById("wel5").style.display="none";
+          }
+          else {
+                 alert("No seats available!");
+               }
+          })
+         }
+         }
+         function addpassenger()
+          {
+              // fullname=document.createElement("input")
+              // fullname.setAttribute("placeholder" , "Enter your Name...")
+              // fullname.setAttribute("type" , "text")
+              // fullname.className="form-control"
+
+              // age=document.createElement("input")
+              // age.setAttribute("placeholder" , "Enter your Age...")
+              // age.setAttribute("type" , "text")
+              // age.className="form-control"
+
+              // mobile=document.createElement("input")
+              // mobile.setAttribute("placeholder" , "Enter your Mobile No...")
+              // mobile.setAttribute("type" , "text")
+              // mobile.className="form-control"
+
+              // sel=document.createElement("select")
+              // sel.setAttribute("value" , "Male")
+
+              document.getElementById("wel4").style.display="block"
+
+              // div.append(fullname)
+              // div.append(age)
+              // div.append(mobile)
+              // div.append(sel)
+          }
+
+          function closepass()
+          {
+             document.getElementById("wel4").style.display="none"
+          }
+
+         function closediv()
+         {
+           document.getElementById("wel5").style.display='none';
+           clean()
+         }
+         function clean()
+         {
+            document.getElementById("name").value=""
+            document.getElementById("age").value=""
+            document.getElementById("no").value=""
+            document.getElementById("gen").value="Select Gender..."
+         }
+
+    </script>
+</body>
+</html>
+</body>
+</html>

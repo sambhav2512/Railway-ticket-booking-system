@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket Booking</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="bootstrap.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.2/css/selectize.bootstrap2.min.css" integrity="sha512-nim/mAXv18Io6DcBNFdFPO52HDTV+X3wpwcy8O0c69gFf8DzR02uA6axNOv1YImhZuiCFIeiQmxiHO3ZqumPYQ==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+</head>
+<body>
+    <div id="div1">
+       <img src="img1.webp" alt="">
+       <div id="wel">
+        <span id="welcome">Welcome </span> <span id="name"> </span>
+       </div>
+    </div>
+    <div id="wel1">
+        <label for="">From:</label><br>
+        <select id="select-state">
+            <option value="">Select Source Destination</option>
+        </select><br>
+
+        <label for="">To:</label><br>
+        <select id="select-state2">
+            <option value="">Select Final Destination</option>
+        </select><br>
+
+        <label for="">Date:</label>
+        <input type="date" id="tdate" class="form-control"><br>
+        <button class="btn-primary" onclick="check()" style="width: 200px; margin-top: 10px; height: 50px;">Search Train</button>
+    </div>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
+
+<!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-analytics.js"></script>
+
+<!-- Add Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-storage.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.2/js/selectize.min.js" integrity="sha512-IOebNkvA/HZjMM7MxL0NYeLYEalloZ8ckak+NDtOViP7oiYzG5vn6WVXyrJDiJPhl4yRdmNAG49iuLmhkUdVsQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
+    <script>
+
+    const firebaseConfig = {
+    apiKey: "AIzaSyANfAzH3yRQwK2Jim_9fa8ej67IuVyvKck",
+    authDomain: "ticketbooking-30d1f.firebaseapp.com",
+    databaseURL: "https://ticketbooking-30d1f-default-rtdb.firebaseio.com",
+    projectId: "ticketbooking-30d1f",
+    storageBucket: "ticketbooking-30d1f.appspot.com",
+    messagingSenderId: "339229011524",
+    appId: "1:339229011524:web:2682ea9cefd91c11dfd611",
+    measurementId: "G-QZ1QFJTL0K"
+  };
+    firebase.initializeApp(firebaseConfig);
+
+        var param = new URLSearchParams(window.location.search);
+        var data = param.get("id");
+        firebase.database().ref("record/").once("value", function (AllRecord) {
+            AllRecord.forEach(function (snapshot) {
+                if (data == snapshot.val().Username) {
+                    document.getElementById("name").innerHTML = snapshot.val().Name
+                }
+            });
+        })
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const databaseRef = firebase.database().ref("Stations/");
+            databaseRef.once('value', function (AllRecord){
+                AllRecord.forEach(function (snapshot){
+                    data=snapshot.val().Station
+                    option=document.createElement("option")
+                    option2=document.createElement("option")
+                    option.textContent=data
+                    option2.textContent=data
+                    document.getElementById("select-state").append(option)
+                    document.getElementById("select-state2").append(option2)
+                    $(document).ready(function () {
+                    $('#select-state').selectize({
+                    sortField: 'text'
+                    });
+                    });
+                    $(document).ready(function () {
+                    $('#select-state2').selectize({
+                    sortField: 'text'
+                    });
+                    });
+                })
+          });
+          });
+
+        var dttoday=new Date();
+        var month= dttoday.getMonth() + 1;
+        var month2=dttoday.getMonth() + 3;
+        var day=dttoday.getDate();
+        var year= dttoday.getFullYear();
+        if(month2<10)
+        {
+            month2= '0' + month2;
+        }
+        if(month<10)
+        {
+            month= '0' + month;
+        }
+        if(day<10)
+        {
+            day= '0' + day;
+        }
+        var mindate= year + '-' + month + '-' + day;
+        var maxdate= year + '-' + month2+ '-' + day;
+        document.getElementById("tdate").setAttribute('min', mindate);
+        document.getElementById("tdate").setAttribute('max' , maxdate);
+
+        function check()
+        {
+            select1=document.getElementById("select-state").value
+            select2=document.getElementById("select-state2").value
+            date=document.getElementById("tdate").value
+            if(!date)
+            {
+               alert("Please select date...")
+               return;
+            }
+            else if(select1==select2)
+              {
+                  alert("Source and Destination can not be same...")
+                  return;
+              }
+            else
+            {
+               window.location.href="selecttrain.html?id1="+select1 + "&id2="+select2 + "&id3="+date
+            }
+        }
+    </script>
+</body>
+</html>

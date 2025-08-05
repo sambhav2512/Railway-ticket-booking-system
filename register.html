@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket Booking</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="bootstrap.css">
+</head>
+<body>
+    <div id="div1">
+       <img src="img1.webp" alt="">
+       <div id="div3">
+        <h1>Book Your Tickets Here...</h1>
+       </div>
+    <div id="div4">
+       <a href="index.html">
+       <button class="btn btn-success" id="btn1">Login</button>
+       </a>
+       <a href="adminlogin.html">
+       <button class="btn btn-success" id="btn2">Admin</button>
+       </a>
+    </div>
+    </div>
+    <div id="div2" >
+             <h1>Register</h1><br><br>
+             <input type="text" id="txtname" placeholder="Name" class="form-control"><br>
+             <input type="text" id="txtusername" placeholder="Username" class="form-control"><br>
+             <input type="password" id="txtpass" placeholder="Password" minlength="6" required class="form-control"><br>
+             <button class="btn btn-success" onclick="store()" >Register</button>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
+
+<!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-analytics.js"></script>
+
+<!-- Add Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-storage.js"></script>
+    
+    <script src="script.js"></script>
+</body>
+</html>

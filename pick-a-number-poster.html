@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Pick a Number - Mega Edition</title>
+  <style>
+    body {
+      margin: 0;
+      background: #111827;
+      color: #F9FAFB;
+      font-family: 'Arial', sans-serif;
+      padding: 20px;
+    }
+
+    .poster {
+      max-width: 2500px;
+      margin: 0 auto;
+      background: #1F2937;
+      padding: 40px;
+      border-radius: 16px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 30px;
+    }
+
+    .header {
+      text-align: center;
+      grid-column: 1 / -1;
+    }
+
+    .title {
+      font-size: 60px;
+      font-weight: bold;
+      background: linear-gradient(45deg, #38bdf8, #a78bfa, #f472b6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      font-size: 28px;
+      color: #9CA3AF;
+      margin-bottom: 30px;
+    }
+
+    .category {
+      background: #374151;
+      border-radius: 8px;
+      padding: 20px;
+    }
+
+    .category h2 {
+      font-size: 24px;
+      margin-bottom: 10px;
+      color: #60a5fa;
+      border-bottom: 2px solid #475569;
+      padding-bottom: 5px;
+    }
+
+    .category ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      font-size: 16px;
+      column-count: 1;
+      column-gap: 20px;
+    }
+
+    .category li {
+      margin-bottom: 6px;
+      color: #d1d5db;
+    }
+
+    .rules {
+      background: rgba(239, 68, 68, 0.2);
+      border-left: 4px solid #ef4444;
+      padding: 10px;
+      margin-top: 20px;
+      font-size: 16px;
+      color: #f87171;
+    }
+  </style>
+</head>
+<body>
+  <div class="poster">
+    <div class="header">
+      <div class="title">Pick a Number</div>
+      <div class="subtitle">Mega Edition</div>
+      <div class="rules">
+        NSFW Rules: If someone does not feel comfortable or okay with buying or doing any NSFW questions, do not make them.
+      </div>
+      <div style="margin-top: 20px; color: #93c5fd; font-size: 18px;">
+        How to Play:<br>
+        Pick a number requires 2 players. First player picks a number and the other player needs to answer as truthfully as possible.
+      </div>
+    </div>
+
+    <div class="category">
+      <h2>Basics</h2>
+      <ul>
+        <li>Age</li>
+        <li>Gender</li>
+        <li>Height</li>
+        <li>Weight</li>
+        <li>Where are you from?</li>
+        <li>Birthday</li>
+        <li>Language(s)</li>
+        <li>Favorite color</li>
+        <li>Favorite drink</li>
+        <li>Favorite food</li>
+        <li>Favorite Music</li>
+        <li>Favorite Music artist</li>
+        <li>Favorite Song</li>
+        <li>Favorite sport</li>
+        <li>Favorite Music Genre</li>
+        <li>What do you listen to when you're sad</li>
+        <li>Favorite movie</li>
+        <li>Favorite TV show</li>
+        <li>Favorite subject</li>
+        <li>Favorite Youtuber</li>
+        <li>Do you like anime?</li>
+        <li>Favorite actor</li>
+        <li>Favorite sleeping position</li>
+        <li>Favorite Cartoon</li>
+        <li>Favorite clothes to wear</li>
+        <li>Favorite clothing</li>
+        <li>Favorite Clothing + Pic</li>
+        <li>Favorite holiday</li>
+        <li>Favorite meme + send meme</li>
+        <li>Favorite website</li>
+        <li>Favorite game</li>
+        <li>Favorite memory</li>
+        <li>Favorite thing to fidget with</li>
+        <li>Favorite post</li>
+        <li>Favorite thing about your house</li>
+        <li>Favorite place near your house</li>
+        <li>Looks</li>
+      </ul>
+    </div>
+
+    <div class="category">
+      <h2>Appearance</h2>
+      <ul>
+        <li>Hair Color</li>
+        <li>Hair length</li>
+        <li>Hairstyle</li>
+        <li>Eye color</li>
+        <li>Body style</li>
+        <li>Ethnicity</li>
+        <li>Do you wear makeup</li>
+        <li>What are you wearing?</li>
+        <li>What are you wearing + Pic</li>
+        <li>Jeans or sweatpants</li>
+        <li>Tattoos?</li>
+        <li>PJs or sweatpants?</li>
+      </ul>
+    </div>
+
+    <div class="category">
+      <h2>Relationships</h2>
+      <ul>
+        <li>How many exes?</li>
+        <li>Virgin?</li>
+        <li>Status</li>
+        <li>Celebrity crush</li>
+        <li>Ideal date</li>
+        <li>Turn ons?</li>
+        <li>Turn offs?</li>
+        <li>Ever have any Crushes?</li>
+        <li>Does anyone have a crush on you?</li>
+        <li>Have you ever been cheated on?</li>
+        <li>Has anyone asked you out before?</li>
+        <li>Have you ever had your first kiss?</li>
+        <li>How do you get when you're horny?</li>
+        <li>Do you want kids?</li>
+        <li>Do you want to get married?</li>
+        <li>How many bf/gfs have you had?</li>
+        <li>Have you dated 2 ppl at one time?</li>
+        <li>Top or Bottom?</li>
+        <li>Dom or Sub?</li>
+      </ul>
+    </div>
+
+    <div class="category">
+      <h2>Web & Past</h2>
+      <ul>
+        <li>What Socials do you have and use?</li>
+        <li>What is your user on (pick one)</li>
+        <li>How active are you on (pick one)</li>
+        <li>Most followed account</li>
+        <li>Most used account</li>
+        <li>Do you follow NSFW pages?</li>
+        <li>Favorite NSFW page</li>
+        <li>What phone do you have</li>
+        <li>Where do you watch movies?</li>
+        <li>Where do you listen to music?</li>
+        <li>Most embarrassing story</li>
+        <li>Most embarrassing story + Full detail</li>
+        <li>Ever smoked anything before?</li>
+        <li>Ever drank anything before?</li>
+        <li>Ever did drugs before?</li>
+        <li>Ever been addicted to drugs?</li>
+        <li>Ever been addicted to Smoking before?</li>
+        <li>Most illegal thing you've done?</li>
+        <li>Ever been in a fist fight?</li>
+        <li>Worst thing you've eaten?</li>
+        <li>Most beautiful place you've been?</li>
+        <li>Most famous place you've been?</li>
+        <li>Have you met a famous person?</li>
+        <li>How far have you moved before?</li>
+      </ul>
+    </div>
+
+    <div class="category">
+      <h2>Belongings</h2>
+      <ul>
+        <li>How much money do you have?</li>
+        <li>Most prized possession</li>
+        <li>Most embarrassing possession?</li>
+        <li>Weirdest thing you own?</li>
+        <li>Coolest thing you own</li>
+        <li>Oldest thing you own</li>
+        <li>Most expensive thing you own?</li>
+        <li>Most useful thing you own?</li>
+        <li>House or apartment?</li>
+        <li>What color is your house?</li>
+        <li>What is in your house?</li>
+        <li>Coolest thing in your house?</li>
+        <li>Do you have your own room?</li>
+        <li>What is in your room?</li>
+        <li>City or town?</li>
+        <li>Is your area rich or poor?</li>
+        <li>What kind of area do you live in?</li>
+      </ul>
+    </div>
+
+    <div class="category">
+      <h2>Would You Rather</h2>
+      <ul>
+        <li>DC or Marvel</li>
+        <li>Boy or girl?</li>
+        <li>Cat or dog?</li>
+        <li>Summer or winter?</li>
+        <li>Rain or snow or sun?</li>
+        <li>TV or Movie?</li>
+        <li>Console or PC?</li>
+        <li>Phone or TV?</li>
+        <li>Hot or Cold?</li>
+        <li>Sweet or sour?</li>
+        <li>Sweet or salty?</li>
+        <li>Rich or famous?</li>
+        <li>Volleyball or basketball?</li>
+        <li>Football or soccer?</li>
+        <li>Cedar Fair or Six Flags?</li>
+        <li>McDonalds or Burger King</li>
+        <li>Day or Night?</li>
+        <li>Siblings or no Siblings</li>
+        <li>Horror or Comedy?</li>
+        <li>Action or Romance?</li>
+        <li>Comedy or Fantasy</li>
+        <li>Feminine or Masculine?</li>
+        <li>Rich or poor?</li>
+        <li>Wipe with hand or sandpaper?</li>
+        <li>Die Right now or Never die</li>
+      </ul>
+    </div>
+
+    <div class="category">
+      <h2>School</h2>
+      <ul>
+        <li>Public or Home schooled?</li>
+        <li>Worst grade you have right now?</li>
+        <li>Best grade you have right now?</li>
+        <li>What is the worst thing you've learned in school?</li>
+        <li>Do you go to the gym?</li>
+        <li>Are in any clubs?</li>
+        <li>Are in any sports?</li>
+        <li>Biggest Age gap you've had</li>
+        <li>Favorite subject?</li>
+        <li>Favorite teacher?</li>
+      </ul>
+    </div>
+
+    <div class="category">
+      <h2>Spicy Zone</h2>
+      <ul>
+        <li>What's your favorite part of sex?</li>
+        <li>What's your sexiest voice + talk in voice</li>
+        <li>Are you Horny right now?</li>
+        <li>Are you Wet right now?</li>
+        <li>Are you a Virgin?</li>
+        <li>Best horny story + full detail</li>
+        <li>Body count?</li>
+        <li>Have you watch porn?</li>
+        <li>Have you sent nudes before?</li>
+        <li>Have you received nudes before?</li>
+        <li>Have you ever played a strip game before?</li>
+        <li>Have you ever seen the same sex full nude before?</li>
+        <li>Have you ever seen the opposite sex full nude before?</li>
+        <li>Favorite place to have sex?</li>
+        <li>Favorite place to masturbate at?</li>
+        <li>Most embarrassing sex story + full detail</li>
+        <li>Have you ever Masturbated to me before?</li>
+        <li>What never fails to make you horny?</li>
+        <li>What never fails to make you horny? + pic</li>
+        <li>Have you ever had a threesome?</li>
+        <li>Most embarrassing sexual story? + full detail</li>
+        <li>Want sext?</li>
+        <li>Want nudes?</li>
+        <li>Thoughts on oral?</li>
+        <li>Thoughts on anal?</li>
+        <li>Ever eaten a girl out before?</li>
+        <li>Ever gotten a blowjob before?</li>
+        <li>Ever given a blowjob before?</li>
+        <li>Ever done anal sex?</li>
+        <li>Favorite way to relieve horniness?</li>
+        <li>Ever been caught masturbating?</li>
+        <li>Has someone seen you nude?</li>
+        <li>Would you ever give me head?</li>
+        <li>Would you ever fuck me?</li>
+        <li>Would you ever let me fuck you?</li>
+        <li>Would you top me?</li>
+        <li>Would you ever make out with me?</li>
+        <li>Would you ever let me give you a hickey?</li>
+        <li>Most recent Nude photo you've taken</li>
+        <li>Want to facetime nude?</li>
+        <li>Want to trade nudes?</li>
+        <li>How big is your dick?</li>
+        <li>How big are your boobs?</li>
+        <li>Would you watch porn with me?</li>
+        <li>Do you want to masturbate on facetime?</li>
+        <li>Dick size?</li>
+        <li>Dick size + pic</li>
+        <li>Boob size?</li>
+        <li>Boob size + pic</li>
+        <li>Pussy pic</li>
+        <li>Ass pic (Panties on)</li>
+        <li>Boobs pic (Bra on)</li>
+        <li>Dick pic (Boxers on)</li>
+        <li>Video of moaning</li>
+        <li>Bald trimmed or Natural + pic</li>
+        <li>Video of moaning + video</li>
+        <li>Condoms or no Condoms</li>
+        <li>Full body nude pic</li>
+        <li>Full body Nude pic Hard/Wet</li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>
